@@ -1,5 +1,5 @@
 # AgroIA-Nariño
-Nombre de la Solución: # AgroIA-Nariño
+Nombre de la Solución: AgroIA-Nariño
 
 Población Objetivo: Pequeños caficultores minifundistas del departamento de Nariño.
 
