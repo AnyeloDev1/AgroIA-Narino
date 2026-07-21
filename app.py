@@ -201,40 +201,43 @@ with tab1:
         municipios_reales = CafeDataService().municipios_disponibles(df_eva)
         st.success(f"🟢 Conectado a datos.gov.co — {len(municipios_reales)} municipios de Nariño con histórico real de café.")
 
-    municipio = st.selectbox(
-        "Seleccione el Municipio:",
-        municipios_reales,
-        key="municipio_select"
-    )
+    with st.form("form_prediccion_finca"):
+        municipio = st.selectbox(
+            "Seleccione el Municipio:",
+            municipios_reales,
+            key="municipio_select"
+        )
 
-    hectareas = st.number_input(
-        "Hectáreas sembradas de café:",
-        min_value=0.1,
-        max_value=100.0,
-        value=1.5,
-        step=0.5,
-        key="hectareas_input"
-    )
+        hectareas = st.number_input(
+            "Hectáreas sembradas de café:",
+            min_value=0.1,
+            max_value=100.0,
+            value=1.5,
+            step=0.5,
+            key="hectareas_input"
+        )
 
-    whatsapp_num = st.text_input(
-        "📱 Número de WhatsApp Destino (Ej: 573101234567):",
-        value="57",
-        key="whatsapp_input"
-    )
+        whatsapp_num = st.text_input(
+            "📱 Número de WhatsApp Destino (Ej: 573101234567):",
+            value="57",
+            key="whatsapp_input"
+        )
 
-    precio_carga = st.number_input(
-        "💰 Precio de referencia (COP por carga de 125 kg) — opcional",
-        min_value=0, value=0, step=10000,
-        help=(
-            "Si lo ingresas, calculamos el valor estimado de tu cosecha y el "
-            "impacto económico de mejorar tu rendimiento. Consulta el precio "
-            "vigente con el botón de la FNC más abajo, o ingresa el que te "
-            "paga tu comprador."
-        ),
-        key="precio_carga_input",
-    )
+        precio_carga = st.number_input(
+            "💰 Precio de referencia (COP por carga de 125 kg) — opcional",
+            min_value=0, value=0, step=10000,
+            help=(
+                "Si lo ingresas, calculamos el valor estimado de tu cosecha y el "
+                "impacto económico de mejorar tu rendimiento. Consulta el precio "
+                "vigente con el botón de la FNC más abajo, o ingresa el que te "
+                "paga tu comprador."
+            ),
+            key="precio_carga_input",
+        )
 
-    if st.button("🔮 Generar Predicción con Datos Reales", key="btn_prediccion"):
+        submitted_pred = st.form_submit_button("🔮 Generar Predicción con Datos Reales", use_container_width=True)
+
+    if submitted_pred:
 
         with st.status("🤖 Consola de IA — iniciando diagnóstico...", expanded=True) as consola:
             st.write(f"🌱 **Datos recibidos:** municipio *{municipio}*, {hectareas} ha")
