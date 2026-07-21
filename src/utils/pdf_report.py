@@ -81,7 +81,8 @@ def _construir_estilos():
 
 
 def generar_reporte_pdf(municipio: str, hectareas: float, resultado: dict,
-                         df_historico: pd.DataFrame = None) -> bytes:
+                         df_historico: pd.DataFrame = None, resultado_ml: dict = None,
+                         recomendaciones: list = None) -> bytes:
     """Construye el PDF en memoria y devuelve los bytes listos para
     st.download_button (no escribe nada en disco)."""
 
@@ -161,6 +162,39 @@ def generar_reporte_pdf(municipio: str, hectareas: float, resultado: dict,
         story.append(tabla_metricas)
         story.append(Spacer(1, 16))
 
+        # ---------- Predicción con Machine Learning ----------
+        if resultado_ml and resultado_ml.get("disponible"):
+            story.append(Paragraph("Predicción con Machine Learning (Random Forest + Gradient Boosting)", estilos["seccion"]))
+            tabla_ml = Table(
+                [
+                    ["Random Forest", f"{resultado_ml['rendimiento_rf_ton_ha']} ton/ha"],
+                    ["Gradient Boosting", f"{resultado_ml['rendimiento_gb_ton_ha']} ton/ha"],
+                    ["Modelo híbrido (RF + GB)", f"{resultado_ml['rendimiento_hibrido_ton_ha']} ton/ha"],
+                ],
+                colWidths=[8 * cm, 7.5 * cm],
+            )
+            tabla_ml.setStyle(TableStyle([
+                ("FONTNAME", (0, 0), (0, -1), "Helvetica"),
+                ("FONTNAME", (1, 0), (1, -1), "Helvetica-Bold"),
+                ("FONTSIZE", (0, 0), (-1, -1), 9.5),
+                ("BACKGROUND", (0, 0), (-1, -1), COLOR_FONDO_TABLA),
+                ("LINEBELOW", (0, 0), (-1, -2), 0.5, colors.HexColor("#DDD1BC")),
+                ("TOPPADDING", (0, 0), (-1, -1), 6),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+            ]))
+            story.append(tabla_ml)
+
+            if resultado_ml.get("perfil_municipio"):
+                perfil = resultado_ml["perfil_municipio"]
+                story.append(Spacer(1, 6))
+                story.append(Paragraph(
+                    f"<b>Perfil del municipio (clustering K-Means):</b> {perfil['perfil']} — "
+                    f"rendimiento histórico promedio {perfil['rendimiento_promedio_historico']} ton/ha, "
+                    f"variabilidad {perfil['variabilidad']} ton/ha.",
+                    estilos["cuerpo"],
+                ))
+            story.append(Spacer(1, 16))
+
         # ---------- Riesgo ----------
         color_riesgo = COLOR_RIESGO.get(resultado["nivel_riesgo"], COLOR_SUAVE)
         story.append(Paragraph("Nivel de riesgo (tendencia de rendimiento)", estilos["seccion"]))
@@ -203,6 +237,22 @@ def generar_reporte_pdf(municipio: str, hectareas: float, resultado: dict,
                 ]))
                 story.append(tabla_hist)
                 story.append(Spacer(1, 16))
+
+    # ---------- Recomendaciones accionables ----------
+    if recomendaciones:
+        story.append(Paragraph("Recomendaciones para esta finca", estilos["seccion"]))
+        color_prioridad = {"Alta": COLOR_CEREZA, "Media": COLOR_ORO, "Baja": COLOR_HOJA}
+        for r in recomendaciones:
+            color = color_prioridad.get(r["prioridad"], COLOR_SUAVE)
+            estilo_item = ParagraphStyle(
+                "ItemRecom", parent=estilos["cuerpo"], leftIndent=10,
+                spaceAfter=6, borderColor=color, borderWidth=0, bulletIndent=0,
+            )
+            story.append(Paragraph(
+                f"<font color='{color.hexval()}'><b>[{r['prioridad']} · {r['categoria']}]</b></font> {r['accion']}",
+                estilo_item,
+            ))
+        story.append(Spacer(1, 10))
 
     # ---------- Pie de página / disclaimer ----------
     story.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#DDD1BC"), spaceAfter=8))

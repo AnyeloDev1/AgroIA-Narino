@@ -1,0 +1,31 @@
+{
+  "random_forest": {
+    "mae_ton_ha": 0.0599,
+    "r2": 0.6814
+  },
+  "gradient_boosting": {
+    "mae_ton_ha": 0.0622,
+    "r2": 0.6966
+  },
+  "hibrido": {
+    "mae_ton_ha": 0.0603,
+    "r2": 0.6954
+  },
+  "anio_validacion": 2024,
+  "filas_entrenamiento": 188,
+  "filas_validacion": 47,
+  "variables_usadas": [
+    "area_sembrada_ha",
+    "area_cosechada_ha",
+    "ratio_area_cosechada_sembrada",
+    "rendimiento_lag1",
+    "rendimiento_lag2",
+    "rendimiento_media_movil_3y",
+    "tendencia_rendimiento_3y",
+    "precipitacion_mm",
+    "temperatura_c",
+    "anomalia_precipitacion",
+    "anomalia_temperatura",
+    "departamento"
+  ]
+}
