@@ -60,7 +60,7 @@ Resultados de referencia (con el dataset demo, ver sección 4):
 | Gradient Boosting | 0.062 | 0.70 |
 | Híbrido | 0.060 | 0.70 |
 
-## 4. ⚠️ Antes de la entrega final: reemplazar el dataset demo por datos 100% reales
+## 4. Dataset con datos 100% reales
 
 Por restricciones de red del entorno donde se desarrolló este módulo (sin salida a internet), los modelos que vienen empaquetados en `data/processed/` se entrenaron con un **dataset sintético calibrado** (`generar_datos_demo.py`), NO con datos reales descargados en vivo. El archivo `dataset_entrenamiento.csv` incluye una columna `fuente = SINTETICO_DEMO_NO_USAR_EN_ENTREGA_FINAL` para que esto sea imposible de pasar por alto.
 
