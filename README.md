@@ -1,4 +1,5 @@
 # AgroIA-Nariño 
+"La inteligencia que impulsa el café de Nariño"
 
 # Población Objetivo: Pequeños caficultores minifundistas del departamento de Nariño.
 
