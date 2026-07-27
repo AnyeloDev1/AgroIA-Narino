@@ -2,6 +2,8 @@
 
 "La inteligencia que impulsa el café de Nariño"
 
+Ingresa aqui a la plataforma funcional👉 https://agroia-narino.streamlit.app/
+
 # Población Objetivo: 
 Pequeños caficultores minifundistas del departamento de Nariño.
 Descripción de la Solución: AgroIA-Nariño es una plataforma web analítica orientada a mitigar la vulnerabilidad climática y comercial de los pequeños productores de café en Nariño, mediante el aprovechamiento de datos públicos reales. La solución consulta de forma automática el dataset EVA (Evaluaciones Agropecuarias Municipales, UPRA/MinAgricultura) publicado en datos.gov.co, para obtener el histórico real de área sembrada, área cosechada, producción y rendimiento cafetero por municipio. Con esa información, la herramienta ofrece al caficultor dos servicios: una estimación de cosecha basada en el rendimiento histórico real de su municipio (en vez de cifras genéricas o inventadas), y un indicador de riesgo que compara el rendimiento del último año reportado contra el promedio histórico del municipio, señalando caídas significativas que pueden ameritar inspección en campo. Complementariamente, incluye un asistente conversacional (modelo de lenguaje Gemini, vía OpenRouter) que responde preguntas del caficultor en tono cercano y campesino, consultando datos agrícolas reales de datos.gov.co como contexto para sus respuestas. Los resultados pueden compartirse como mensaje de texto o como reporte descargable en PDF, listo para adjuntar en WhatsApp.
