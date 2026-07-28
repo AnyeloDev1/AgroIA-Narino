@@ -51,9 +51,11 @@ Esto sobrescribe `data/processed/dataset_entrenamiento.csv`, los `.pkl` de los m
 
 ## 5. Cómo se usa en la app
 
+Ingresa aquí a la plataforma funcional👉 https://agroia-narino.streamlit.app/
+
 En la Pestaña 1, después de la estimación base (promedio histórico), aparece una sección **"Predicción con Machine Learning"** con las 3 predicciones (RF, GB, híbrido), las métricas de validación del modelo, y el perfil/cluster del municipio. Todo esto también se incluye en el reporte PDF descargable.
 
-## 6. Estructura de archivos nuevos
+## 6. Estructura de archivos
 
 ```
 src/ml/
