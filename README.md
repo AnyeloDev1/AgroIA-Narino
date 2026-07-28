@@ -3,6 +3,8 @@
 "La inteligencia que impulsa el café de Nariño"
 
 Ingresa aqui a la plataforma funcional👉 https://agroia-narino.streamlit.app/
+<img width="1895" height="977" alt="image" src="https://github.com/user-attachments/assets/68150895-7d9c-460a-b2d7-5ec3a21c225a" />
+
 
 # Población Objetivo: 
 Pequeños caficultores minifundistas del departamento de Nariño.
