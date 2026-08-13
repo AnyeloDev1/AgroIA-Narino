@@ -585,7 +585,7 @@ with tab2:
             with st.chat_message("user"):
                 st.write(user_query)
 
-            # --- CONSULTA EN TIEMPO REAL OPTIMIZADA (LÍMITE ESTRICTO DE TIEMPO Y TAMAÑO) ---
+            # --- CONSULTA EN TIEMPO REAL
             datos_contexto_api = "No se encontraron registros específicos en esta consulta rápida."
 
             palabras = user_query.lower()
